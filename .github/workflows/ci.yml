@@ -25,6 +25,14 @@ jobs:
       - name: Compilar y ejecutar pruebas
         run: mvn --batch-mode clean test
 
+      - name: Alertar si falla alguna prueba
+        if: failure()
+        run: |
+          echo "::error::ALERTA: El pipeline detectó un fallo en las pruebas."
+          echo "## ALERTA DE PRUEBAS" >> $GITHUB_STEP_SUMMARY
+          echo "Se detectó un fallo durante la ejecución del pipeline." >> $GITHUB_STEP_SUMMARY
+          echo "Revisar los registros de GitHub Actions y los reportes de pruebas." >> $GITHUB_STEP_SUMMARY
+
       - name: Generar resumen del pipeline
         if: always()
         run: |
