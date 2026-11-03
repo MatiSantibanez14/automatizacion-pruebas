@@ -29,6 +29,8 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: resultados-pruebas
-          path: target/surefire-reports/
+          name: reportes-pruebas
+          path: |
+            target/surefire-reports/
+            target/cucumber-reports/
           if-no-files-found: warn
